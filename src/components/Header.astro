@@ -1,0 +1,26 @@
+---
+import { profile } from "@data/profile";
+
+const navItems = [
+  { href: "", label: "Home" },
+  { href: "projects", label: "Projects" },
+  { href: "posts", label: "Notes" },
+  { href: "about", label: "About" },
+  { href: "contact", label: "Contact" },
+];
+
+const base = import.meta.env.BASE_URL;
+---
+
+<header class="border-b border-zinc-200/80 bg-stone-50/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/85">
+  <nav class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between" aria-label="Primary navigation">
+    <a href={base} class="text-sm font-semibold tracking-wide text-zinc-950 dark:text-white">{profile.name}</a>
+    <div class="flex flex-wrap items-center gap-1 text-sm text-zinc-600 dark:text-zinc-300">
+      {navItems.map((item) => (
+        <a class="rounded-md px-3 py-2 hover:bg-zinc-200/70 hover:text-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-white" href={`${base}${item.href}`}>
+          {item.label}
+        </a>
+      ))}
+    </div>
+  </nav>
+</header>

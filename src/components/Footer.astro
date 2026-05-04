@@ -1,0 +1,10 @@
+---
+import { profile } from "@data/profile";
+---
+
+<footer class="border-t border-zinc-200/80 dark:border-zinc-800">
+  <div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-8 text-sm text-zinc-600 dark:text-zinc-400 sm:flex-row sm:items-center sm:justify-between">
+    <p>&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
+    <p>Built with Astro, TypeScript, Tailwind CSS, and MDX.</p>
+  </div>
+</footer>

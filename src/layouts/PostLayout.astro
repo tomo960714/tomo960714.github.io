@@ -1,0 +1,30 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  post: CollectionEntry<"posts">;
+}
+
+const { post } = Astro.props;
+const { title, description, date, updatedDate } = post.data;
+---
+
+<BaseLayout title={`${title} | Notes`} description={description}>
+  <article class="mx-auto max-w-3xl px-5 py-14 sm:py-20">
+    <a class="text-sm font-medium text-emerald-700 hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-300" href={`${import.meta.env.BASE_URL}posts`}>
+      Back to notes
+    </a>
+    <header class="mt-8 border-b border-zinc-200 pb-8 dark:border-zinc-800">
+      <p class="text-sm text-zinc-500 dark:text-zinc-400">
+        <time datetime={date.toISOString()}>{date.toLocaleDateString("en", { year: "numeric", month: "long", day: "numeric" })}</time>
+        {updatedDate && <> · Updated <time datetime={updatedDate.toISOString()}>{updatedDate.toLocaleDateString("en", { year: "numeric", month: "long", day: "numeric" })}</time></>}
+      </p>
+      <h1 class="mt-4 text-4xl font-semibold text-zinc-950 dark:text-white sm:text-5xl">{title}</h1>
+      <p class="mt-5 leading-8 text-zinc-600 dark:text-zinc-300">{description}</p>
+    </header>
+    <div class="content mt-10">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

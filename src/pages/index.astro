@@ -1,0 +1,48 @@
+---
+import ExperienceItem from "@components/ExperienceItem.astro";
+import Hero from "@components/Hero.astro";
+import ProjectCard from "@components/ProjectCard.astro";
+import Section from "@components/Section.astro";
+import SkillTag from "@components/SkillTag.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { experience } from "@data/experience";
+import { profile } from "@data/profile";
+import { skills } from "@data/skills";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects"))
+  .filter((project) => project.data.featured)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title={`${profile.name} | Portfolio`} description={profile.summary}>
+  <Hero />
+
+  <Section eyebrow="Projects" title="" description="A small selection of projects. Edit these in src/content/projects.">
+    <div class="grid gap-5 md:grid-cols-2">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+    <a class="mt-6 inline-flex text-sm font-medium text-emerald-700 hover:text-emerald-900 dark:text-emerald-400 dark:hover:text-emerald-300" href={`${import.meta.env.BASE_URL}projects`}>
+      View all projects
+    </a>
+  </Section>
+
+  <Section eyebrow="Skills" title="">
+    <div class="flex flex-wrap gap-2">
+      {skills.map((skill) => <SkillTag label={skill} />)}
+    </div>
+  </Section>
+
+  <Section eyebrow="Experience" title="Recent experience">
+    <div class="space-y-7">
+      {experience.slice(0, 2).map((item) => <ExperienceItem {...item} />)}
+    </div>
+  </Section>
+
+  <Section class="pb-20" title="Let’s build something clear and useful." description="Replace this call-to-action with your own tone. The contact page uses a simple mailto link, so there is no backend to maintain.">
+    <a class="inline-flex rounded-md bg-zinc-950 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200" href={`${import.meta.env.BASE_URL}contact`}>
+      Get in touch
+    </a>
+  </Section>
+</BaseLayout>

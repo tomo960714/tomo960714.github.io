@@ -1,0 +1,17 @@
+---
+import ProjectCard from "@components/ProjectCard.astro";
+import Section from "@components/Section.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { profile } from "@data/profile";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title={`Projects | ${profile.name}`} description="Projects, case studies, and selected work.">
+  <Section eyebrow="Projects" title="" description="Projects are written in MDX and managed through Astro content collections.">
+    <div class="grid gap-5 md:grid-cols-2">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </Section>
+</BaseLayout>

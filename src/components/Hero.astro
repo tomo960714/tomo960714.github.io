@@ -1,0 +1,15 @@
+---
+import ContactLinks from "@components/ContactLinks.astro";
+import { profile } from "@data/profile";
+---
+
+<section class="mx-auto max-w-5xl px-5 py-16 sm:py-24">
+  <div class="max-w-3xl">
+    <h1 class="text-4xl font-semibold leading-tight text-zinc-950 dark:text-white sm:text-6xl">{profile.name}</h1>
+    <p class="mt-5 text-xl text-zinc-700 dark:text-zinc-300 sm:text-2xl">{profile.title}</p>
+    <p class="mt-6 max-w-2xl leading-8 text-zinc-600 dark:text-zinc-300">{profile.summary}</p>
+    <div class="mt-8">
+      <ContactLinks />
+    </div>
+  </div>
+</section>

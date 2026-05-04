@@ -1,0 +1,29 @@
+---
+import Section from "@components/Section.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { profile } from "@data/profile";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("posts", ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title={`Notes | ${profile.name}`} description="Short notes and writing.">
+  <Section eyebrow="Notes" title="Writing and reflections" description="Optional lightweight writing powered by MDX.">
+    <div class="divide-y divide-zinc-200 border-y border-zinc-200 dark:divide-zinc-800 dark:border-zinc-800">
+      {posts.map((post) => {
+        const slug = post.id.replace(/\.mdx?$/, "");
+        return (
+          <article class="py-6">
+            <time class="text-sm text-zinc-500 dark:text-zinc-400" datetime={post.data.date.toISOString()}>
+              {post.data.date.toLocaleDateString("en", { year: "numeric", month: "long", day: "numeric" })}
+            </time>
+            <h2 class="mt-2 text-xl font-semibold text-zinc-950 dark:text-white">
+              <a class="hover:text-emerald-700 dark:hover:text-emerald-400" href={`${import.meta.env.BASE_URL}posts/${slug}`}>{post.data.title}</a>
+            </h2>
+            <p class="mt-3 leading-7 text-zinc-600 dark:text-zinc-300">{post.data.description}</p>
+          </article>
+        );
+      })}
+    </div>
+  </Section>
+</BaseLayout>
