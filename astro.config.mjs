@@ -28,6 +28,6 @@ export default defineConfig({
     assumed to be "main", and the workflow in .github/workflows/deploy.yml
     publishes the generated ./dist directory to GitHub Pages.
   */
-  site: "https://yourusername.github.io",
+  site: "https://tomo960714.github.io",
   base: "/",
 });
