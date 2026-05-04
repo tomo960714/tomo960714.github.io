@@ -25,6 +25,7 @@ const ogImageUrl = Astro.site ? new URL(imagePath, Astro.site).toString() : imag
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -37,17 +38,19 @@ const ogImageUrl = Astro.site ? new URL(imagePath, Astro.site).toString() : imag
     <meta property="og:image" content={ogImageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
     <script is:inline>
-      const storedTheme = (() => {
+      const theme = (() => {
         try {
-          return localStorage.getItem("theme");
+          const storedTheme = localStorage.getItem("theme");
+          if (storedTheme === "light" || storedTheme === "dark") {
+            return storedTheme;
+          }
         } catch {
-          return null;
+          // Ignore storage access errors and fall back to system preference.
         }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       })();
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
-        document.documentElement.classList.add("dark");
-      }
+      document.documentElement.dataset.theme = theme;
+      document.documentElement.style.colorScheme = theme;
     </script>
   </head>
   <body class="min-h-screen">

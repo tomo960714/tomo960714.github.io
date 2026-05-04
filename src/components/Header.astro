@@ -12,15 +12,55 @@ const navItems = [
 const base = import.meta.env.BASE_URL;
 ---
 
-<header class="border-b border-zinc-200/80 bg-stone-50/90 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/85">
+<header class="border-b border-[var(--color-border)] bg-[var(--color-header-bg)] backdrop-blur">
   <nav class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-4 sm:flex-row sm:items-center sm:justify-between" aria-label="Primary navigation">
-    <a href={base} class="text-sm font-semibold tracking-wide text-zinc-950 dark:text-white">{profile.name}</a>
-    <div class="flex flex-wrap items-center gap-1 text-sm text-zinc-600 dark:text-zinc-300">
-      {navItems.map((item) => (
-        <a class="rounded-md px-3 py-2 hover:bg-zinc-200/70 hover:text-zinc-950 dark:hover:bg-zinc-800 dark:hover:text-white" href={`${base}${item.href}`}>
-          {item.label}
-        </a>
-      ))}
+    <a href={base} class="text-sm font-semibold tracking-wide text-[var(--color-text)]">{profile.name}</a>
+    <div class="flex flex-wrap items-center gap-2 text-sm text-[var(--color-text-muted)]">
+      <div class="flex flex-wrap items-center gap-1">
+        {navItems.map((item) => (
+          <a class="rounded-md px-3 py-2 hover:bg-[var(--color-surface-muted)] hover:text-[var(--color-text)]" href={`${base}${item.href}`}>
+            {item.label}
+          </a>
+        ))}
+      </div>
+      <button
+        class="inline-flex items-center rounded-md border border-[var(--color-border-strong)] px-3 py-2 text-sm font-medium text-[var(--color-text)] hover:border-[var(--color-text)] hover:bg-[var(--color-surface-muted)]"
+        type="button"
+        id="theme-toggle"
+        aria-label="Switch to dark theme"
+        aria-pressed="false"
+      >
+        <span aria-hidden="true" data-theme-toggle-icon>Dark</span>
+      </button>
     </div>
   </nav>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>("#theme-toggle");
+  const toggleIcon = toggle?.querySelector<HTMLElement>("[data-theme-toggle-icon]");
+  const getTheme = () => document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+
+  const updateToggle = () => {
+    if (!toggle || !toggleIcon) return;
+    const theme = getTheme();
+    const isDark = theme === "dark";
+    toggle.ariaPressed = String(isDark);
+    toggle.ariaLabel = `Switch to ${isDark ? "light" : "dark"} theme`;
+    toggleIcon.textContent = isDark ? "Light" : "Dark";
+  };
+
+  toggle?.addEventListener("click", () => {
+    const nextTheme = getTheme() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    document.documentElement.style.colorScheme = nextTheme;
+    try {
+      localStorage.setItem("theme", nextTheme);
+    } catch {
+      // Theme switching still works when storage is unavailable.
+    }
+    updateToggle();
+  });
+
+  updateToggle();
+</script>
