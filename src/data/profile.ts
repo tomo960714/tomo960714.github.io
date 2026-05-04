@@ -4,9 +4,9 @@ export const profile = {
   location: "Aarhus, Denmark",
   email: "tamasbartos96@gmail.com",
   summary:
-    "I build thoughtful software with a focus on clarity, maintainability, and practical impact. This short summary is a placeholder for your own profile.",
+    "I build solutions for data enginering, machine learning, and data visualization.",
   bio:
-    "Write a few paragraphs about your background, the kinds of problems you enjoy solving, and what makes your work distinctive. Keep it specific and human.",
+    "Electrical engineering graduate who enjoys solving problems with data. I have a background in machine learning and data visualization, but I equaly enjoy working on data engineering problems and running my (currently small) HomeLab. I have a passion for learning new technologies and sharing my knowledge with others. I am always looking for new challenges and opportunities to further develop my skills and contribute to the data community.",
   education: [
     {
       institution: "Aarhus University - MSc in Electrical and Computer Engineering",
