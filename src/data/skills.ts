@@ -1,12 +1,12 @@
 export const skills = [
-  "TypeScript",
   "Python",
-  "Astro",
-  "React",
-  "Tailwind CSS",
-  "Data analysis",
-  "Machine learning",
   "SQL",
+  "Deep learning",
+  "Machine learning",
+  "Data analysis",
+  "Power BI",
   "Git",
   "Cloud basics",
+  "Data engineering",
+  "Data visualization",
 ];
