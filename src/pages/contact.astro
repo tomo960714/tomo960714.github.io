@@ -7,7 +7,7 @@ import { profile } from "@data/profile";
 ---
 
 <BaseLayout title={`Contact | ${profile.name}`} description="Contact links and email address.">
-  <Section eyebrow="Contact" title="Get in touch" description="No backend form is needed. This page uses a simple email link plus public profile links.">
+  <Section eyebrow="Contact" title="Get in touch" description="">
     <div class="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-900/70">
       <p class="text-sm font-medium text-zinc-500 dark:text-zinc-400">Email</p>
       <a class="mt-2 inline-flex text-lg font-semibold text-zinc-950 hover:text-emerald-700 dark:text-white dark:hover:text-emerald-400" href={`mailto:${profile.email}`}>

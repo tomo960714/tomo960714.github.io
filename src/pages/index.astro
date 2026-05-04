@@ -34,13 +34,13 @@ const projects = (await getCollection("projects"))
     </div>
   </Section>
 
-  <Section eyebrow="Experience" title="Recent experience">
+  <Section eyebrow="Experience" title="">
     <div class="space-y-7">
       {experience.slice(0, 2).map((item) => <ExperienceItem {...item} />)}
     </div>
   </Section>
 
-  <Section class="pb-20" title="Let’s build something clear and useful." description="Replace this call-to-action with your own tone. The contact page uses a simple mailto link, so there is no backend to maintain.">
+  <Section class="pb-20" title="Want to build something with me?" description="">
     <a class="inline-flex rounded-md bg-zinc-950 px-4 py-2 text-sm font-medium text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200" href={`${import.meta.env.BASE_URL}contact`}>
       Get in touch
     </a>
