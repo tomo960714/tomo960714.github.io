@@ -1,5 +1,7 @@
 ---
 import ContactLinks from "@components/ContactLinks.astro";
+import EducationList from "@components/EducationList.astro";
+import { education } from "@data/education";
 import { profile } from "@data/profile";
 ---
 
@@ -12,6 +14,12 @@ import { profile } from "@data/profile";
       <div class="mt-8">
         <ContactLinks />
       </div>
+      <section class="mt-10 max-w-3xl" aria-labelledby="profile-education-heading">
+        <h2 id="profile-education-heading" class="text-xl font-semibold text-zinc-950 dark:text-white">Education</h2>
+        <div class="mt-4">
+          <EducationList items={education} compact />
+        </div>
+      </section>
     </div>
   </div>
 </section>
